@@ -1,25 +1,64 @@
 package s3.root.gui.Loop;
 
-import javax.swing.JPanel;
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.nio.channels.ScatteringByteChannel;
 
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
-public class MainLoop extends JPanel implements Runnable {
+public class MainLoop extends Canvas implements Runnable {
 
+	// Main State Manager
 	public ScreensManager SM;
 
-	public long pre;
-	public long now;
+	// dimensions
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = 240;
+	public static final int SCALE = 3;
+	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
+
+	// main thread
+	private boolean running = false;
+	boolean initialized = false;
+	private Thread thread;
+
+	// frames / time control
 	public static int frame_limit = 60;
 	public static long fps = 1000_000_000L / frame_limit;
+	private long pre;
+	private long now;
 
-	int frames = 0;
-	int ticks = 0;
-	long timer = 0;
+	// FPS display
+	private int frames = 0;
+	private int ticks = 0;
+	private long timer = 0;
 
-	private boolean running = false;
-	private Thread thread;
+	// image
+	private BufferedImage image;
+	private Graphics g;
+	BufferStrategy bs;
+	private int[] pixels;
+
+	// Constructor
+	public MainLoop() {
+
+		this.image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		this.pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = 0xff00ff;
+		}
+		this.SM = new ScreensManager();
+
+		setPreferredSize(d);
+		setFocusable(true);
+		requestFocus();
+	}
 
 	@Override
 	public void run() {
@@ -31,18 +70,19 @@ public class MainLoop extends JPanel implements Runnable {
 			now = System.nanoTime();
 			while (now - pre >= fps) {
 				pre = now;
-				render();
+				render(g);
 				frames++;
+				drawToScreen(g);
 			}
 			update();
 			ticks++;
 
-			// display FPS and updates
 			displayFPS(timer);
 		}
 
 	}
 
+	// display FPS and updates
 	public void displayFPS(long timer) {
 		if (System.currentTimeMillis() - timer >= 1000) {
 			this.timer += 1000;
@@ -53,19 +93,59 @@ public class MainLoop extends JPanel implements Runnable {
 	}
 
 	private void update() {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < pixels.length; i++) {
+			if (i % 2 == 0) {
+				pixels[i] = 0xff0000;
+			}
+//			if (i % 3 == 0) {
+//				pixels[i] = 0x00ff00;
+//			}
+//			if (i % 5 == 0) {
+//				pixels[i] = 0x000ff;
+//			}
+//			if (i % 7 == 0) {
+//				pixels[i] = 0xffff00;
+//			}
+		}
+	}
+
+	private void render(Graphics g) {
 
 	}
 
-	private void render() {
-		// TODO Auto-generated method stub
+	private void drawToScreen(Graphics g) {
+
+		bs = this.getBufferStrategy();
+		if (bs == null) {
+			this.createBufferStrategy(3);
+			return;
+		}
+
+		g = bs.getDrawGraphics();
+
+		// rendering Area 51 :P
+		////////////////////////////////////////////////////////////////////
+		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+
+		////////////////////////////////////////////////////////////////////
+
+		g.dispose();
+		bs.show();
+		clear(pixels);
+	}
+
+	private void clear(int[] pixels) {
+
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = 0xff00ff;
+		}
 
 	}
 
 	public void start() {
 		if (running == false) {
 			running = true;
-			thread = new Thread(this);
+			thread = new Thread(this, "Main Loop");
 		} else
 			return;
 		thread.start();

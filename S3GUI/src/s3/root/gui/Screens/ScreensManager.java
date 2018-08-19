@@ -4,26 +4,27 @@ import java.util.ArrayList;
 
 public class ScreensManager {
 
-	private ArrayList<Screen> states;
-	private int currentState;
-	
-	public static final int MainScreen = 0;
+	private ArrayList<Screen> screens;
+	private int currentScreen;
+
+	public static final int MAINSCREEN = 0;
 
 	public ScreensManager() {
-		states = new ArrayList<Screen>();
-		currentState = MainScreen;
+		screens = new ArrayList<Screen>();
+		currentScreen = MAINSCREEN;
+		screens.add(new SandBoxScreen());
 	}
 
-	public void setState(int state) {
-		currentState = state;
-		states.get(currentState).init();
+	public void setState(int screen) {
+		currentScreen = screen;
+		screens.get(currentScreen).init();
 	}
 
 	public void update() {
-		states.get(currentState).update();
+		screens.get(currentScreen).update();
 	}
 
-	public void draw(java.awt.Graphics2D g) {
-		states.get(currentState).draw(g);
+	public void render(java.awt.Graphics2D g) {
+		screens.get(currentScreen).render(g);
 	}
 }
