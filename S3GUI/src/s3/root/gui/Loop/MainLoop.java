@@ -2,8 +2,12 @@ package s3.root.gui.Loop;
 
 import javax.swing.JPanel;
 
+import s3.root.gui.Screens.ScreensManager;
+
 @SuppressWarnings("serial")
 public class MainLoop extends JPanel implements Runnable {
+
+	public ScreensManager SM;
 
 	public long pre;
 	public long now;
@@ -22,7 +26,7 @@ public class MainLoop extends JPanel implements Runnable {
 
 		pre = System.nanoTime();
 		timer = System.currentTimeMillis();
-		
+
 		while (running) {
 			now = System.nanoTime();
 			while (now - pre >= fps) {
@@ -32,7 +36,7 @@ public class MainLoop extends JPanel implements Runnable {
 			}
 			update();
 			ticks++;
-			
+
 			// display FPS and updates
 			displayFPS(timer);
 		}
@@ -40,7 +44,7 @@ public class MainLoop extends JPanel implements Runnable {
 	}
 
 	public void displayFPS(long timer) {
-		if (System.currentTimeMillis() - timer>= 1000) {
+		if (System.currentTimeMillis() - timer >= 1000) {
 			this.timer += 1000;
 			System.out.println("Frames: " + frames + " - Updates: " + ticks);
 			frames = 0;

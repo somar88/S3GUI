@@ -6,15 +6,15 @@ public class ScreensManager {
 
 	private ArrayList<Screen> states;
 	private int currentState;
+	
+	public static final int MainScreen = 0;
 
 	public ScreensManager() {
 		states = new ArrayList<Screen>();
-
-		currentState = 0;
+		currentState = MainScreen;
 	}
 
 	public void setState(int state) {
-
 		currentState = state;
 		states.get(currentState).init();
 	}
@@ -25,6 +25,5 @@ public class ScreensManager {
 
 	public void draw(java.awt.Graphics2D g) {
 		states.get(currentState).draw(g);
-
 	}
 }
