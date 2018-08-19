@@ -1,6 +1,9 @@
 package s3.root.gui.Loop;
 
-public class Loop implements Runnable {
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class MainLoop extends JPanel implements Runnable {
 
 	public long pre;
 	public long now;
@@ -12,7 +15,7 @@ public class Loop implements Runnable {
 	long timer = 0;
 
 	private boolean running = false;
-	private Thread t;
+	private Thread thread;
 
 	@Override
 	public void run() {
@@ -29,6 +32,8 @@ public class Loop implements Runnable {
 			}
 			update();
 			ticks++;
+			
+			// display FPS and updates
 			displayFPS(timer);
 		}
 
@@ -56,17 +61,17 @@ public class Loop implements Runnable {
 	public void start() {
 		if (running == false) {
 			running = true;
-			t = new Thread(this);
+			thread = new Thread(this);
 		} else
 			return;
-		t.start();
+		thread.start();
 	}
 
 	public void stop() {
 		if (running == true) {
 			running = false;
 			try {
-				t.join();
+				thread.join();
 			} catch (InterruptedException e) {
 				System.err.println("Error: Couldn't stop loop thread.");
 				e.printStackTrace();
