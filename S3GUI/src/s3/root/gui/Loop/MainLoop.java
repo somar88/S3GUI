@@ -6,7 +6,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.Random;
 
+import s3.root.gui.Entity.Dot;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
@@ -16,9 +18,9 @@ public class MainLoop extends Canvas implements Runnable {
 	public ScreensManager SM;
 
 	// dimensions
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 240;
-	public static final int SCALE = 3;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 360;
+	public static final int SCALE = 2;
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
 	// main thread
@@ -42,6 +44,9 @@ public class MainLoop extends Canvas implements Runnable {
 	private Graphics g;
 	BufferStrategy bs;
 	private int[] pixels;
+
+	// objects
+	Dot d01 = new Dot(0, 0);
 
 	// Constructor
 	public MainLoop() {
@@ -69,7 +74,7 @@ public class MainLoop extends Canvas implements Runnable {
 			now = System.nanoTime();
 			while (now - pre >= fps) {
 				pre = now;
-				render(g);
+				render(pixels);
 				frames++;
 				drawToScreen(g);
 			}
@@ -92,12 +97,17 @@ public class MainLoop extends Canvas implements Runnable {
 	}
 
 	private void update() {
-		for (int i = 0; i < pixels.length; i++) {
-			if (i % 2 == 0) {
-				pixels[i] = 0xff0000;
-			}
+
+//		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
+
+		d01.update();
+
+//		for (int i = 0; i < pixels.length; i++) {
+//			if (i % 2 == 0) {
+//				pixels[i] = 0xff0000;
+//			}
 //			if (i % 3 == 0) {
-//				pixels[i] = 0x00ff00;
+//				pixels[i] = 0xdfb160;
 //			}
 //			if (i % 5 == 0) {
 //				pixels[i] = 0x000ff;
@@ -105,10 +115,12 @@ public class MainLoop extends Canvas implements Runnable {
 //			if (i % 7 == 0) {
 //				pixels[i] = 0xffff00;
 //			}
-		}
+//		}
 	}
 
-	private void render(Graphics g) {
+	private void render(int[] pixel_array) {
+		
+		d01.render(pixels);
 
 	}
 
@@ -119,9 +131,8 @@ public class MainLoop extends Canvas implements Runnable {
 			this.createBufferStrategy(3);
 			return;
 		}
-
+		
 		g = bs.getDrawGraphics();
-
 		// rendering Area 51 :P
 		////////////////////////////////////////////////////////////////////
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
@@ -130,15 +141,13 @@ public class MainLoop extends Canvas implements Runnable {
 
 		g.dispose();
 		bs.show();
-		clear(pixels);
+//		clear(pixels);
 	}
 
 	private void clear(int[] pixels) {
-
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0xff00ff;
+			pixels[i] = 0x6E3562;
 		}
-
 	}
 
 	public void start() {
