@@ -73,14 +73,14 @@ public class MainLoop extends Canvas implements Runnable {
 		while (running) {
 			now = System.nanoTime();
 			while (now - pre >= fps) {
-				pre = now;
-				render(pixels);
-				frames++;
-				drawToScreen(g);
-			}
-			update();
-			ticks++;
+				update();
+				ticks++;
 
+				pre = now;
+			}
+			render(pixels);
+			frames++;
+			drawToScreen(g);
 			displayFPS(timer);
 		}
 
@@ -119,7 +119,7 @@ public class MainLoop extends Canvas implements Runnable {
 	}
 
 	private void render(int[] pixel_array) {
-		
+
 		d01.render(pixels);
 
 	}
@@ -131,7 +131,7 @@ public class MainLoop extends Canvas implements Runnable {
 			this.createBufferStrategy(3);
 			return;
 		}
-		
+
 		g = bs.getDrawGraphics();
 		// rendering Area 51 :P
 		////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ public class MainLoop extends Canvas implements Runnable {
 
 		g.dispose();
 		bs.show();
-//		clear(pixels);
+		clear(pixels);
 	}
 
 	private void clear(int[] pixels) {

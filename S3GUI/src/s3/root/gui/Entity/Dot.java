@@ -49,7 +49,10 @@ public class Dot {
 		default:
 			break;
 		}
-
+	}
+	
+	public void move() {
+		
 	}
 
 	public void render() {
