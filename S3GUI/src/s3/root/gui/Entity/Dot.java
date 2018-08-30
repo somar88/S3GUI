@@ -55,7 +55,7 @@ public class Dot {
 		
 	}
 
-	public void render() {
+	public void render(MainLoop mainLoop, int[] pixels) {
 
 	}
 

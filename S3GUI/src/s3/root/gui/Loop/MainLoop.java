@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import s3.root.gui.Entity.Dot;
+import s3.root.gui.Layer.Map;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
@@ -19,7 +20,7 @@ public class MainLoop extends Canvas implements Runnable {
 	// dimensions
 	public static final int WIDTH = 340;
 	public static final int HEIGHT = WIDTH * 9 / 16;
-	public static final int SCALE = 2;
+	public static final int SCALE = 3;
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
 	// main thread
@@ -45,7 +46,8 @@ public class MainLoop extends Canvas implements Runnable {
 	private int[] pixels;
 
 	// objects
-	Dot d01 = new Dot(0, 0);
+	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
+	Map m01 = new Map(50, 50);
 
 	// Constructor
 	public MainLoop() {
@@ -100,7 +102,7 @@ public class MainLoop extends Canvas implements Runnable {
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
 
 		d01.update();
-
+		m01.update();
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
 //				pixels[i] = 0xff0000;
@@ -117,8 +119,9 @@ public class MainLoop extends Canvas implements Runnable {
 //		}
 	}
 
-	private void render(int[] pixel_array) {
+	private void render(int pixels[]) {
 
+		m01.render(pixels);
 		d01.render(pixels);
 
 	}
@@ -131,10 +134,10 @@ public class MainLoop extends Canvas implements Runnable {
 			return;
 		}
 		g = bs.getDrawGraphics();
-		
-		
+
 		// rendering Area 51 :P
 		////////////////////////////////////////////////////////////////////
+
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 
 		////////////////////////////////////////////////////////////////////
