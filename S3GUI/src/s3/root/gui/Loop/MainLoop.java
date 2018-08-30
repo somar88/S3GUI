@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Random;
 
 import s3.root.gui.Entity.Dot;
 import s3.root.gui.Screens.ScreensManager;
@@ -18,8 +17,8 @@ public class MainLoop extends Canvas implements Runnable {
 	public ScreensManager SM;
 
 	// dimensions
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 360;
+	public static final int WIDTH = 340;
+	public static final int HEIGHT = WIDTH * 9 / 16;
 	public static final int SCALE = 2;
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
@@ -131,8 +130,9 @@ public class MainLoop extends Canvas implements Runnable {
 			this.createBufferStrategy(3);
 			return;
 		}
-
 		g = bs.getDrawGraphics();
+		
+		
 		// rendering Area 51 :P
 		////////////////////////////////////////////////////////////////////
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
