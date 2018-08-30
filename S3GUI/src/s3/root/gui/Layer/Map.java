@@ -1,5 +1,7 @@
 package s3.root.gui.Layer;
 
+import java.util.Random;
+
 import s3.root.gui.Loop.MainLoop;
 
 public class Map extends S3UILayer {
@@ -14,6 +16,7 @@ public class Map extends S3UILayer {
 		init();
 	}
 
+	@Override
 	public void render(int[] pixels) {
 		for (int x = 0; x < width; x++) {
 			if (x + xpos < MainLoop.WIDTH || x + xpos > 0) {
@@ -26,11 +29,18 @@ public class Map extends S3UILayer {
 		}
 	}
 
+	@Override
 	public void update() {
-		xpos++;
+		if (xpos < MainLoop.WIDTH - this.width && xpos > 0)
+			xpos--;
+//			xpos += new Random().nextInt(3) - 1;
+		if (ypos < MainLoop.HEIGHT - this.height && ypos > 0)
+			ypos--;
+//			ypos += new Random().nextInt(3) - 1;
 	}
 
-	private void init() {
+	@Override
+	public void init() {
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0xff00ff;
 		}

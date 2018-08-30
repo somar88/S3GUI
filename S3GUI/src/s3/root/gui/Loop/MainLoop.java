@@ -76,7 +76,6 @@ public class MainLoop extends Canvas implements Runnable {
 			while (now - pre >= fps) {
 				update();
 				ticks++;
-
 				pre = now;
 			}
 			render(pixels);
@@ -100,7 +99,6 @@ public class MainLoop extends Canvas implements Runnable {
 	private void update() {
 
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
-
 		d01.update();
 		m01.update();
 //		for (int i = 0; i < pixels.length; i++) {

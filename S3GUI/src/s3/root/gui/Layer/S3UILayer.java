@@ -10,9 +10,9 @@ public abstract class S3UILayer {
 	protected int xpos;
 	protected int ypos;
 
-	protected void render(int[] pixels) {
-	}
+	public abstract void init();
 
-	protected void update() {
-	}
+	public abstract void render(int[] pixels);
+
+	public abstract void update();
 }
