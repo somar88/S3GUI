@@ -31,18 +31,20 @@ public class Map extends S3UILayer {
 
 	@Override
 	public void update() {
-		if (xpos < MainLoop.WIDTH - this.width && xpos > 0)
+		if (xpos < MainLoop.WIDTH - this.width && xpos > 0) {
 			xpos--;
 //			xpos += new Random().nextInt(3) - 1;
-		if (ypos < MainLoop.HEIGHT - this.height && ypos > 0)
+		}
+		if (ypos < MainLoop.HEIGHT - this.height && ypos > 0) {
 			ypos--;
 //			ypos += new Random().nextInt(3) - 1;
+		}
 	}
 
 	@Override
 	public void init() {
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0xff00ff;
+			pixels[i] = 0xffff0A;
 		}
 	}
 
