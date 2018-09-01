@@ -49,7 +49,7 @@ public class MainLoop extends Canvas implements Runnable {
 	// objects
 	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
 	Tile m01 = new Tile(50, 50);
-	TileMap tm01 = new TileMap(24, 10);
+	TileMap tm01 = new TileMap(6, 3);
 
 	// Constructor
 	public MainLoop() {
@@ -103,6 +103,7 @@ public class MainLoop extends Canvas implements Runnable {
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
 //		d01.update();
 //		m01.update();
+		tm01.update();
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
 //				pixels[i] = 0xff0000;
