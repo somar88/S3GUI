@@ -4,13 +4,13 @@ import java.util.Random;
 
 import s3.root.gui.Loop.MainLoop;
 
-public class Map extends S3UILayer {
+public class Tile extends S3UILayer {
 
-	public Map(int w, int h) {
+	public Tile(int w, int h) {
 
 		this.width = w;
 		this.height = h;
-		this.pixels = new int[width * height];
+		this.imgPXs = new int[width * height];
 		this.xpos = MainLoop.WIDTH / 2;
 		this.ypos = MainLoop.HEIGHT / 2;
 		init();
@@ -22,7 +22,7 @@ public class Map extends S3UILayer {
 			if (x + xpos < MainLoop.WIDTH || x + xpos > 0) {
 				for (int y = 0; y < height; y++) {
 					if (y + ypos < MainLoop.HEIGHT || y + ypos > 0) {
-						pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = this.pixels[x + y * width];
+						pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = this.imgPXs[x + y * width];
 					}
 				}
 			}
@@ -41,8 +41,17 @@ public class Map extends S3UILayer {
 
 	@Override
 	public void init() {
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0xff00ff;
+		for (int i = 0; i < imgPXs.length; i++) {
+			if (i % width == i)
+				imgPXs[i] = 0xff0000;// upper side
+			else if (i % width == 0)
+				imgPXs[i] = 0x00ff00;// left side
+			else if (i % width == width - 1)
+				imgPXs[i] = 0x0000ff;// right side
+			else if (i >= imgPXs.length - width)
+				imgPXs[i] = 0xffffff;// down side
+			else
+				imgPXs[i] = 0xff00ff;// rest
 		}
 	}
 

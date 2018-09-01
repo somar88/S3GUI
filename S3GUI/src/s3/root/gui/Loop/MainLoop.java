@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import s3.root.gui.Entity.Dot;
-import s3.root.gui.Layer.Map;
+import s3.root.gui.Layer.Tile;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
@@ -47,7 +47,7 @@ public class MainLoop extends Canvas implements Runnable {
 
 	// objects
 	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
-	Map m01 = new Map(50, 50);
+	Tile m01 = new Tile(50, 50);
 
 	// Constructor
 	public MainLoop() {
@@ -99,7 +99,7 @@ public class MainLoop extends Canvas implements Runnable {
 	private void update() {
 
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
-		d01.update();
+//		d01.update();
 		m01.update();
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
