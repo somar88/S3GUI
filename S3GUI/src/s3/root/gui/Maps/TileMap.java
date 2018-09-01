@@ -1,6 +1,6 @@
 package s3.root.gui.Maps;
 
-import java.awt.Image;
+import java.util.Random;
 
 import s3.root.gui.Loop.MainLoop;
 
@@ -14,36 +14,53 @@ public class TileMap {
 
 	public int tImgPXs[];
 
-	public void init() {
-		this.width = 64;
-		this.height = 64;
+	public TileMap(int mapWidth, int mapHeight) {
+		this.width = mapWidth;
+		this.height = mapHeight;
 		this.xpos = 0;
 		this.ypos = 0;
-		tImgPXs = new int[width * height * 256];
+		init();
+	}
+
+	public void init() {
+		tImgPXs = new int[width * height * 16 * 16];
+		System.out.println(tImgPXs.length);
 		randomizeTiles(width, height);
 	}
 
 	public void render(int[] pixels) {
+
+		for (int i = 0; i < width * 16; i++) {
+			if (i < MainLoop.WIDTH)
+				for (int j = 0; j < height * 16; j++) {
+					if (j < MainLoop.HEIGHT)
+						pixels[(i + xpos) + (j + ypos) * MainLoop.WIDTH] = tImgPXs[i + j * width * 16];
+				}
+		}
+
 	}
 
 	public void update() {
 	}
 
 	private void randomizeTiles(int w, int h) {
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = 0; i < w - 1; i++) {
+			for (int j = 0; j < h - 1; j++) {
 				printAtPos(i, j);
 			}
 		}
 	}
-	
+
 	private void printAtPos(int xpos, int ypos) {
+		int tileXpos = xpos * 16;
+		int tileYpos = ypos * 16;
+		int color = new Random().nextInt(0x1_000_000);
 
 		for (int x = 0; x < 16; x++) {
-			if (x + xpos < MainLoop.WIDTH || x + xpos > 0) {
+			if (x + tileXpos < width * 16 || x + tileXpos > 0) {
 				for (int y = 0; y < 16; y++) {
-					if (y + ypos < MainLoop.HEIGHT || y + ypos > 0) {
-						tImgPXs[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = this.tImgPXs[x + y * width];
+					if (y + tileYpos < height || y + tileYpos > 0) {
+						tImgPXs[(x + (tileXpos )) + ((y + (tileYpos )) * (width - 1))] = color;
 					}
 				}
 			}
