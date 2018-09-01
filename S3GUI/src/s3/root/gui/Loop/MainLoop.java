@@ -117,7 +117,7 @@ public class MainLoop extends Canvas implements Runnable {
 //		}
 	}
 
-	private void render(int pixels[]) {
+	private void render(int pixels[]) { 
 
 		m01.render(pixels);
 		d01.render(pixels);
