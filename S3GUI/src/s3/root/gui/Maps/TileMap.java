@@ -30,31 +30,32 @@ public class TileMap {
 
 	public void render(int[] pixels) {
 
-		for (int i = 0; i < width * 16; i++) {
-			if (i < MainLoop.WIDTH - 1)
-				for (int j = 0; j < height * 16; j++) {
-					if (j < MainLoop.HEIGHT - 1)
-						pixels[(i + xpos) + (j + ypos) * MainLoop.WIDTH] = tImgPXs[i + j * width * 16];
+		for (int x = 0; x < width * 16; x++) {
+			if (x + xpos > 0 && x + xpos < MainLoop.WIDTH)
+				for (int y = 0; y < height * 16; y++) {
+					if (y + ypos > 0 && y + ypos < MainLoop.HEIGHT)
+						pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = tImgPXs[x + y * width * 16];
 				}
 		}
 
 	}
 
 	public void update() {
+		this.ypos++;
 		this.xpos++;
 	}
 
 	private void randomizeTiles(int w, int h) {
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				printAtPos(i, j);
+		for (int txpos = 0; txpos < w; txpos++) {
+			for (int typos = 0; typos < h; typos++) {
+				printAtPos(txpos, typos);
 			}
 		}
 	}
 
-	private void printAtPos(int xpos, int ypos) {
-		int tileXpos = xpos * 16;
-		int tileYpos = ypos * 16;
+	private void printAtPos(int txpos, int typos) {
+		int tileXpos = txpos << 4;
+		int tileYpos = typos << 4;
 		int color = new Random().nextInt(0x1_000_000);
 
 		for (int x = 0; x < 16; x++) {

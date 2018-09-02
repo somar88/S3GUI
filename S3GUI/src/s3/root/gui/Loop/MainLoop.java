@@ -49,7 +49,7 @@ public class MainLoop extends Canvas implements Runnable {
 	// objects
 	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
 	Tile m01 = new Tile(50, 50);
-	TileMap tm01 = new TileMap(6, 3);
+	TileMap tm01 = new TileMap(10, 10);
 
 	// Constructor
 	public MainLoop() {
@@ -58,7 +58,7 @@ public class MainLoop extends Canvas implements Runnable {
 		this.pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0xff00ff;
+			pixels[i] = 0x000000;
 		}
 		this.SM = new ScreensManager();
 
@@ -150,7 +150,7 @@ public class MainLoop extends Canvas implements Runnable {
 
 	private void clear(int[] pixels) {
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0x6E3562;
+			pixels[i] = 0x000000;
 		}
 	}
 
