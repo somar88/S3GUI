@@ -9,7 +9,12 @@ import s3.root.gui.Loop.MainLoop;
 
 public class Tile extends S3UILayer {
 
-	public static final Tile Zero = new Tile("/Tiles/0xALL.png");
+	public static final Tile ZERO = new Tile("/Tiles/0xALL.png");
+	public static final Tile GRASS = new Tile("/Tiles/0xGrass.png");
+	public static final Tile MUD = new Tile("/Tiles/0xMud.png");
+	public static final Tile SAND = new Tile("/Tiles/0xSand.png");
+	public static final Tile WATER = new Tile("/Tiles/0xWater.png");
+	public static final Tile BRICKWALL = new Tile("/Tiles/0xBrickWall.png");
 
 	public String path;
 
@@ -18,7 +23,11 @@ public class Tile extends S3UILayer {
 			BufferedImage img = ImageIO.read(Tile.class.getResource(path));
 			this.width = img.getWidth();
 			this.height = img.getHeight();
+			imgPXs = new int[width * height];
 			img.getRGB(0, 0, width, height, imgPXs, 0, width);
+			this.xpos = 0;
+			this.ypos = 0;
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +75,14 @@ public class Tile extends S3UILayer {
 			else
 				imgPXs[i] = 0xff00ff;// rest
 		}
+	}
+
+	public int getWidth() {
+		return this.width;
+	}
+
+	public int getHeight() {
+		return this.height;
 	}
 
 }

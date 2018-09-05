@@ -9,7 +9,8 @@ import java.awt.image.DataBufferInt;
 
 import s3.root.gui.Entity.Dot;
 import s3.root.gui.Layer.Tile;
-import s3.root.gui.Maps.TileMap;
+import s3.root.gui.Maps.LoadableMap;
+import s3.root.gui.Maps.RandomizedMap;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
@@ -48,8 +49,8 @@ public class MainLoop extends Canvas implements Runnable {
 
 	// objects
 	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
-	Tile m01 = new Tile(50, 50);
-	TileMap tm01 = new TileMap(10, 10);
+	Tile m01 = Tile.ZERO;
+	LoadableMap tm01 = new LoadableMap("/Maps/BigTestMAP.png");
 
 	// Constructor
 	public MainLoop() {
@@ -102,7 +103,7 @@ public class MainLoop extends Canvas implements Runnable {
 
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
 //		d01.update();
-//		m01.update();
+		m01.update();
 		tm01.update();
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
@@ -138,7 +139,6 @@ public class MainLoop extends Canvas implements Runnable {
 
 		// rendering Area 51 :P
 		////////////////////////////////////////////////////////////////////
-
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 
 		////////////////////////////////////////////////////////////////////

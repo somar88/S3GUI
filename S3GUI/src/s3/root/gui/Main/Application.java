@@ -12,10 +12,9 @@ public class Application {
 		
 		JFrame window = new JFrame("Start Window!");
 		MainLoop MainLoop = new MainLoop();
-		
 		window.setResizable(false);
 		window.add(MainLoop);
-//		window.setUndecorated(true);
+		window.setUndecorated(true);
 		window.setBackground(Color.BLACK);
 		window.pack();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

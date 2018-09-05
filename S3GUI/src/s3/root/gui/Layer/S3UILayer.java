@@ -5,7 +5,7 @@ public abstract class S3UILayer {
 	protected int width;
 	protected int height;
 
-	protected int[] imgPXs;
+	public int[] imgPXs;
 
 	protected int xpos;
 	protected int ypos;
