@@ -1,10 +1,14 @@
 package s3.root.gui.Layer;
 
-import java.util.Random;
-
 import s3.root.gui.Loop.MainLoop;
 
 public class Tile extends S3UILayer {
+	
+	public String path;
+	
+	public Tile(String path) {
+		
+	}
 
 	public Tile(int w, int h) {
 
@@ -31,12 +35,6 @@ public class Tile extends S3UILayer {
 
 	@Override
 	public void update() {
-		if (xpos < MainLoop.WIDTH - this.width && xpos > 0)
-			xpos--;
-//			xpos += new Random().nextInt(3) - 1;
-		if (ypos < MainLoop.HEIGHT - this.height && ypos > 0)
-			ypos--;
-//			ypos += new Random().nextInt(3) - 1;
 	}
 
 	@Override

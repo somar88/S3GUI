@@ -19,10 +19,10 @@ public class TileMap {
 		this.height = mapHeight;
 		this.xpos = 0;
 		this.ypos = 0;
-		init();
+		initRandomMap();
 	}
 
-	public void init() {
+	public void initRandomMap() {
 		tImgPXs = new int[width * height * 16 * 16];
 		System.out.println(tImgPXs.length);
 		randomizeTiles(width, height);
