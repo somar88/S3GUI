@@ -44,6 +44,10 @@ public class TileMap {
 		this.ypos++;
 		this.xpos++;
 	}
+	
+	private void loadTilesFromImage() {
+		
+	}
 
 	private void randomizeTiles(int w, int h) {
 		for (int txpos = 0; txpos < w; txpos++) {

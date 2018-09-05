@@ -1,13 +1,28 @@
 package s3.root.gui.Layer;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import s3.root.gui.Loop.MainLoop;
 
 public class Tile extends S3UILayer {
-	
+
+	public static final Tile Zero = new Tile("/Tiles/0xALL.png");
+
 	public String path;
-	
+
 	public Tile(String path) {
-		
+		try {
+			BufferedImage img = ImageIO.read(Tile.class.getResource(path));
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+			img.getRGB(0, 0, width, height, imgPXs, 0, width);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Tile(int w, int h) {
