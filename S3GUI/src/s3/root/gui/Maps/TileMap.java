@@ -5,8 +5,8 @@ public abstract class TileMap {
 	protected int width;
 	protected int height;
 
-	public int xpos = 0;
-	public int ypos = 0;
+	public int xpos;
+	public int ypos;
 
 	public int tImgPXs[];
 

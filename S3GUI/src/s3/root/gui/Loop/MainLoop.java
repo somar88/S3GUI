@@ -20,9 +20,11 @@ public class MainLoop extends Canvas implements Runnable {
 	public ScreensManager SM;
 
 	// dimensions
-	public static final int WIDTH = 340;
+	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 9 / 16;
-	public static final int SCALE = 3;
+	public static final int SCALE = 2;
+	public static final int TILESIZE = 16;
+	
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
 	// main thread
@@ -103,7 +105,7 @@ public class MainLoop extends Canvas implements Runnable {
 
 //		pixels[new Random().nextInt(pixels.length)] = 0xdfb160;
 //		d01.update();
-		m01.update();
+//		m01.update();
 		tm01.update();
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
