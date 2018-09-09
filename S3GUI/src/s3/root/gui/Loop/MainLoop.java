@@ -3,11 +3,16 @@ package s3.root.gui.Loop;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.awt.peer.KeyboardFocusManagerPeer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +23,7 @@ import s3.root.gui.Maps.RandomizedMap;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
-public class MainLoop extends Canvas implements Runnable, MouseListener {
+public class MainLoop extends Canvas implements Runnable, MouseListener, KeyListener {
 
 	// Main State Manager
 	public ScreensManager SM;
@@ -176,6 +181,7 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 			running = true;
 			thread = new Thread(this, "Main Loop");
 			addMouseListener(this);
+			addKeyListener(this);
 		} else
 			return;
 		thread.start();
@@ -221,5 +227,34 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		dots.add(new Dot(e.getX() / MainLoop.SCALE, e.getY() / MainLoop.SCALE));
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			tm01.ypos++;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			tm01.ypos--;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_A) {
+			tm01.xpos--;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			tm01.xpos++;
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }
