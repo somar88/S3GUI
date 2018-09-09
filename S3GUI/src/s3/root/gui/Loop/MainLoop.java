@@ -3,18 +3,21 @@ package s3.root.gui.Loop;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
+import java.util.List;
 
 import s3.root.gui.Entity.Dot;
 import s3.root.gui.Layer.Tile;
 import s3.root.gui.Maps.LoadableMap;
-import s3.root.gui.Maps.RandomizedMap;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
-public class MainLoop extends Canvas implements Runnable {
+public class MainLoop extends Canvas implements Runnable, MouseListener {
 
 	// Main State Manager
 	public ScreensManager SM;
@@ -24,7 +27,7 @@ public class MainLoop extends Canvas implements Runnable {
 	public static final int HEIGHT = WIDTH * 9 / 16;
 	public static final int SCALE = 2;
 	public static final int TILESIZE = 16;
-	
+
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
 	// main thread
@@ -50,7 +53,8 @@ public class MainLoop extends Canvas implements Runnable {
 	private int[] pixels;
 
 	// objects
-	Dot d01 = new Dot(WIDTH / 2, HEIGHT / 2);
+	List<Dot> dots = new ArrayList<Dot>();
+//	add(new Dot(WIDTH / 2, HEIGHT / 2));
 	Tile m01 = Tile.ZERO;
 	LoadableMap tm01 = new LoadableMap("/Maps/BigTestMAP.png");
 
@@ -107,6 +111,9 @@ public class MainLoop extends Canvas implements Runnable {
 //		d01.update();
 //		m01.update();
 		tm01.update();
+		for (Dot i : dots) {
+			i.update();
+		}
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
 //				pixels[i] = 0xff0000;
@@ -125,6 +132,9 @@ public class MainLoop extends Canvas implements Runnable {
 
 	private void render(int pixels[]) {
 		tm01.render(pixels);
+		for (Dot i : dots) {
+			i.render(pixels);
+		}
 //		m01.render(pixels);
 //		d01.render(pixels);
 
@@ -160,6 +170,7 @@ public class MainLoop extends Canvas implements Runnable {
 		if (running == false) {
 			running = true;
 			thread = new Thread(this, "Main Loop");
+			addMouseListener(this);
 		} else
 			return;
 		thread.start();
@@ -176,5 +187,34 @@ public class MainLoop extends Canvas implements Runnable {
 			}
 		} else
 			return;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		System.out.println("X: " + e.getX() + ", Y: " + e.getY());
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		System.out.println("X: " + e.getX() + ", Y: " + e.getY());
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		dots.add(new Dot(e.getX() / MainLoop.SCALE, e.getY() / MainLoop.SCALE));
 	}
 }

@@ -24,8 +24,11 @@ public class LoadableMap extends TileMap {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.xpos = (MainLoop.WIDTH / 2) - (this.width * MainLoop.TILESIZE / 2);
-		this.ypos = (MainLoop.HEIGHT / 2) - (this.height * MainLoop.TILESIZE / 2);
+
+		this.xpos = 0;
+		this.ypos = 0;
+//		this.xpos = (MainLoop.WIDTH / 2) - (this.width * MainLoop.TILESIZE / 2);
+//		this.ypos = (MainLoop.HEIGHT / 2) - (this.height * MainLoop.TILESIZE / 2);
 		init();
 	}
 
@@ -47,11 +50,9 @@ public class LoadableMap extends TileMap {
 	@Override
 	public void render(int[] pixels) {
 		for (int x = 0; x < width * MainLoop.TILESIZE; x++) {
-			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH)
-				for (int y = 0; y < height * MainLoop.TILESIZE; y++) {
-					if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT)
-						pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = imgPixels[x + y * width * MainLoop.TILESIZE];
-				}
+			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH) for (int y = 0; y < height * MainLoop.TILESIZE; y++) {
+				if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT) pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = imgPixels[x + y * width * MainLoop.TILESIZE];
+			}
 		}
 	}
 
@@ -63,8 +64,7 @@ public class LoadableMap extends TileMap {
 //			if (x + tileXpos < width * 16 || x + tileXpos > 0) {
 			for (int y = 0; y < MainLoop.TILESIZE; y++) {
 //					if (y + tileYpos < height || y + tileYpos > 0) {
-				imgPixels[(x + tileXpos) + ((y + (tileYpos)) * (width * MainLoop.TILESIZE))] = tile.imgPXs[x
-						+ y * tile.getWidth()];
+				imgPixels[(x + tileXpos) + ((y + (tileYpos)) * (width * MainLoop.TILESIZE))] = tile.imgPXs[x + y * tile.getWidth()];
 			}
 		}
 	}

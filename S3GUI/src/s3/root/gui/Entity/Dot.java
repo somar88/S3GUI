@@ -24,35 +24,31 @@ public class Dot {
 		switch (new Random().nextInt(4)) {
 		case 0:
 			// move right
-			if (xpos == MainLoop.WIDTH - 1)
-				break;
+			if (xpos == MainLoop.WIDTH - 1) break;
 			xpos++;
 			break;
 		case 1:
 			// move down
-			if (ypos == MainLoop.HEIGHT - 1)
-				break;
+			if (ypos == MainLoop.HEIGHT - 1) break;
 			ypos++;
 			break;
 		case 2:
 			// move left
-			if (xpos == 0)
-				break;
+			if (xpos == 0) break;
 			xpos--;
 			break;
 		case 3:
 			// move right
-			if (ypos == 0)
-				break;
+			if (ypos == 0) break;
 			ypos--;
 			break;
 		default:
 			break;
 		}
 	}
-	
+
 	public void move() {
-		
+
 	}
 
 	public void render(MainLoop mainLoop, int[] pixels) {
@@ -60,7 +56,7 @@ public class Dot {
 	}
 
 	public void render(int[] pixels) {
-		pixels[xpos + (MainLoop.WIDTH * ypos)] = 0xffffff;
+		pixels[xpos + (MainLoop.WIDTH * ypos)] = 0x000000;
 	}
 
 }
