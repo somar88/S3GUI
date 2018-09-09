@@ -9,12 +9,12 @@ import s3.root.gui.Loop.MainLoop;
 
 public class Tile extends S3UILayer {
 
-	public static final Tile ZERO = new Tile("/Tiles/0xALL.png");
-	public static final Tile GRASS = new Tile("/Tiles/0xGrass.png");
-	public static final Tile MUD = new Tile("/Tiles/0xMud.png");
-	public static final Tile SAND = new Tile("/Tiles/0xSand.png");
-	public static final Tile WATER = new Tile("/Tiles/0xWater.png");
-	public static final Tile BRICKWALL = new Tile("/Tiles/0xBrickWall.png");
+	public static final Tile ZERO = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xALL.png");
+	public static final Tile GRASS = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xGrass.png");
+	public static final Tile MUD = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xMud.png");
+	public static final Tile SAND = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xSand.png");
+	public static final Tile WATER = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xWater.png");
+	public static final Tile BRICKWALL = new Tile("/Tiles/" + MainLoop.TILEINITIALIZER + "xBrickWall.png");
 
 	public String path;
 

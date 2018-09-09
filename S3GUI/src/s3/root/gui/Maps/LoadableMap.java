@@ -18,7 +18,7 @@ public class LoadableMap extends TileMap {
 			this.width = img.getWidth();
 			this.height = img.getHeight();
 			tImgPXs = new int[width * height];
-			imgPixels = new int[width * MainLoop.TILESIZE * width * MainLoop.TILESIZE];
+			imgPixels = new int[(width * MainLoop.TILESIZE * width * MainLoop.TILESIZE)];
 			img.getRGB(0, 0, width, height, tImgPXs, 0, width);
 
 		} catch (IOException e) {
@@ -49,22 +49,22 @@ public class LoadableMap extends TileMap {
 
 	@Override
 	public void render(int[] pixels) {
-		for (int x = 0; x < width * MainLoop.TILESIZE; x++) {
-			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH) for (int y = 0; y < height * MainLoop.TILESIZE; y++) {
-				if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT) pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = imgPixels[x + y * width * MainLoop.TILESIZE];
+		for (int x = 0; x < (width << MainLoop.TILESIZE_DIVIDER); x++) {
+			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH) for (int y = 0; y < (height << MainLoop.TILESIZE_DIVIDER); y++) {
+				if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT) pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = imgPixels[x + y * (width << MainLoop.TILESIZE_DIVIDER)];
 			}
 		}
 	}
 
 	private void loadTileAtPosition(Tile tile, int Txpos, int Typos) {
-		int tileXpos = Txpos << 4;
-		int tileYpos = Typos << 4;
+		int tileXpos = Txpos << MainLoop.TILESIZE_DIVIDER;
+		int tileYpos = Typos << MainLoop.TILESIZE_DIVIDER;
 
 		for (int x = 0; x < MainLoop.TILESIZE; x++) {
 //			if (x + tileXpos < width * 16 || x + tileXpos > 0) {
 			for (int y = 0; y < MainLoop.TILESIZE; y++) {
 //					if (y + tileYpos < height || y + tileYpos > 0) {
-				imgPixels[(x + tileXpos) + ((y + (tileYpos)) * (width * MainLoop.TILESIZE))] = tile.imgPXs[x + y * tile.getWidth()];
+				imgPixels[(x + tileXpos) + ((y + (tileYpos)) * (width << MainLoop.TILESIZE_DIVIDER))] = tile.imgPXs[x + y * tile.getWidth()];
 			}
 		}
 	}

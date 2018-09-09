@@ -14,6 +14,7 @@ import java.util.List;
 import s3.root.gui.Entity.Dot;
 import s3.root.gui.Layer.Tile;
 import s3.root.gui.Maps.LoadableMap;
+import s3.root.gui.Maps.RandomizedMap;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
@@ -26,7 +27,9 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH * 9 / 16;
 	public static final int SCALE = 2;
-	public static final int TILESIZE = 16;
+	public static final int TILESIZE = 32;
+	public static final int TILESIZE_DIVIDER = 5;
+	public static String TILEINITIALIZER = Integer.toString(TILESIZE);
 
 	public Dimension d = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 
@@ -57,6 +60,7 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 //	add(new Dot(WIDTH / 2, HEIGHT / 2));
 	Tile m01 = Tile.ZERO;
 	LoadableMap tm01 = new LoadableMap("/Maps/BigTestMAP.png");
+//	RandomizedMap tm01 = new RandomizedMap(40, 22);
 
 	// Constructor
 	public MainLoop() {
@@ -67,7 +71,8 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0x000000;
 		}
-		this.SM = new ScreensManager();
+
+//		this.SM = new ScreensManager();
 
 		setPreferredSize(d);
 		setFocusable(true);
@@ -111,9 +116,9 @@ public class MainLoop extends Canvas implements Runnable, MouseListener {
 //		d01.update();
 //		m01.update();
 		tm01.update();
-		for (Dot i : dots) {
-			i.update();
-		}
+//		for (Dot i : dots) {
+//			i.update();
+//		}
 //		for (int i = 0; i < pixels.length; i++) {
 //			if (i % 2 == 0) {
 //				pixels[i] = 0xff0000;

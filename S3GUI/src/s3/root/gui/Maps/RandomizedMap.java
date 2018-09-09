@@ -18,7 +18,7 @@ public class RandomizedMap extends TileMap {
 	}
 
 	public void initRandomMap() {
-		tImgPXs = new int[width * MainLoop.TILESIZE * height * MainLoop.TILESIZE];
+		tImgPXs = new int[(width << MainLoop.TILESIZE_DIVIDER) * (height << MainLoop.TILESIZE_DIVIDER)];
 		System.out.println(tImgPXs.length);
 		init();
 	}
@@ -38,24 +38,24 @@ public class RandomizedMap extends TileMap {
 	}
 
 	private void clorfulRandomization(int txpos, int typos) {
-		int tileXpos = txpos << 4;
-		int tileYpos = typos << 4;
+		int tileXpos = txpos << MainLoop.TILESIZE_DIVIDER;
+		int tileYpos = typos << MainLoop.TILESIZE_DIVIDER;
 		int color = new Random().nextInt(0x1_000_000);
 
 		for (int x = 0; x < MainLoop.TILESIZE; x++) {
 //			if (x + tileXpos < width * MainLoop.TILESIZE || x + tileXpos > 0) {
 			for (int y = 0; y < MainLoop.TILESIZE; y++) {
 //					if (y + tileYpos < height || y + tileYpos > 0) {
-				tImgPXs[(x + tileXpos) + ((y + (tileYpos)) * (width * MainLoop.TILESIZE))] = color;
+				tImgPXs[(x + tileXpos) + ((y + (tileYpos)) * (width << MainLoop.TILESIZE_DIVIDER))] = color;
 			}
 		}
 	}
 
 	@Override
 	public void render(int[] pixels) {
-		for (int x = 0; x < width * MainLoop.TILESIZE; x++) {
-			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH) for (int y = 0; y < height * MainLoop.TILESIZE; y++) {
-				if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT) pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = tImgPXs[x + y * width * MainLoop.TILESIZE];
+		for (int x = 0; x < (width << MainLoop.TILESIZE_DIVIDER); x++) {
+			if (x + xpos >= 0 && x + xpos < MainLoop.WIDTH) for (int y = 0; y < (height << MainLoop.TILESIZE_DIVIDER); y++) {
+				if (y + ypos >= 0 && y + ypos < MainLoop.HEIGHT) pixels[(x + xpos) + (y + ypos) * MainLoop.WIDTH] = tImgPXs[x + y * (width << MainLoop.TILESIZE_DIVIDER)];
 			}
 		}
 	}
