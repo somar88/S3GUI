@@ -7,19 +7,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.awt.peer.KeyboardFocusManagerPeer;
 import java.util.ArrayList;
 import java.util.List;
 
 import s3.root.gui.Entity.Dot;
 import s3.root.gui.Layer.Tile;
 import s3.root.gui.Maps.LoadableMap;
-import s3.root.gui.Maps.RandomizedMap;
 import s3.root.gui.Screens.ScreensManager;
 
 @SuppressWarnings("serial")
